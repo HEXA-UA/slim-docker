@@ -12,7 +12,7 @@ ENV PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
 RUN apt-get update \
     && apt-get install -y zlib1g-dev git gnupg curl apt-utils --no-install-recommends \
     && apt-get -y autoclean \
-    && pecl install xdebug-2.5.0
+    && pecl install xdebug-2.5.0 \
     && docker-php-ext-install xdebug \
     && docker-php-ext-install zip \
     && docker-php-ext-install sockets
