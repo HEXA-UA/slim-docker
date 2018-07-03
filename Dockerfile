@@ -9,7 +9,7 @@ ENV PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     COMPOSER_ALLOW_SUPERUSER=1
 
 RUN apt-get update \
-    && apt-get install -y zlib1g-dev git gnupg curl apt-utils openssh-client --no-install-recommends \
+    && apt-get install -y zlib1g-dev git gnupg curl apt-utils openssh-client procps net-tools xvfb --no-install-recommends \
     && apt-get -y autoclean \
     && docker-php-ext-install zip \
     && docker-php-ext-install sockets
@@ -23,11 +23,7 @@ RUN apt-get purge -y g++ \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer clear-cache
 
-# Install composer plugins
-RUN composer global require --optimize-autoloader \
-        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" \
-        && composer global dumpautoload --optimize \
-        && composer clear-cache
+
 
 # Install nodejs, webpack
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
