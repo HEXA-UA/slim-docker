@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
+    VERSION_PHING=2.* \
     COMPOSER_ALLOW_SUPERUSER=1
 
 RUN apt-get update \
@@ -23,7 +24,16 @@ RUN apt-get purge -y g++ \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer clear-cache
 
+# Install composer plugins
+RUN composer global require --optimize-autoloader \
+        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" \
+        && composer global dumpautoload --optimize \
+        && composer clear-cache
 
+RUN composer global require --optimize-autoloader \
+        "phing/phing:${VERSION_PHING}" \
+        && composer global dumpautoload --optimize \
+        && composer clear-cache
 
 # Install nodejs, webpack
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
