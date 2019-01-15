@@ -10,10 +10,13 @@ ENV PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     COMPOSER_ALLOW_SUPERUSER=1
 
 RUN apt-get update \
-    && apt-get install -y zlib1g-dev git gnupg curl apt-utils openssh-client procps net-tools xvfb --no-install-recommends \
+    && apt-get install -y zlib1g-dev git gnupg curl apt-utils openssh-client procps net-tools xvfb libpng-dev --no-install-recommends \
     && apt-get -y autoclean \
     && docker-php-ext-install zip \
-    && docker-php-ext-install sockets
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install json \
+    && docker-php-ext-install fileinfo
 
 RUN pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug
