@@ -11,8 +11,9 @@ ENV PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
 
 RUN apt-get update \
     && apt-get install -y zlib1g-dev git gnupg curl apt-utils \
-    openssh-client procps net-tools xvfb libpng-dev --no-install-recommends \
+    openssh-client procps net-tools xvfb libpng-dev libjpeg-dev --no-install-recommends \
     && apt-get -y autoclean \
+    && /usr/local/bin/docker-php-ext-configure gd --with-jpeg-dir=/usr/include \
     && docker-php-ext-install zip \
     && docker-php-ext-install sockets \
     && docker-php-ext-install gd
