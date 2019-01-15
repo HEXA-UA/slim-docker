@@ -14,9 +14,7 @@ RUN apt-get update \
     && apt-get -y autoclean \
     && docker-php-ext-install zip \
     && docker-php-ext-install sockets \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install json \
-    && docker-php-ext-install fileinfo
+    && docker-php-ext-install gd
 
 RUN pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug
