@@ -1,4 +1,4 @@
-FROM php:7.2-fpm:latest
+FROM php:7.2-fpm
 MAINTAINER Hexa "info@hexa.com.ua"
 
 # Environment settings
