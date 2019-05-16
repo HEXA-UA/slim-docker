@@ -43,6 +43,10 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs build-essential
 RUN npm install -g webpack
 
+RUN curl -LO https://deployer.org/deployer.phar
+RUN mv deployer.phar /usr/local/bin/dep
+RUN chmod +x /usr/local/bin/dep
+
 # Debug info
 RUN node -v
 RUN npm -v
